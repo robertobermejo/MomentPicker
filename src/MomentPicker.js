@@ -421,6 +421,7 @@
                 prev        : showPrev,
                 min         : min,
                 max         : max,
+                showedDate  : showedDate,
                 renderYears : function () { render(0); },
                 renderMonths: function () { render(1); },
                 renderDays  : function () { render(2); }
