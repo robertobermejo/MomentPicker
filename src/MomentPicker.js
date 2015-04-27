@@ -3,11 +3,11 @@
     var pluginName = 'MomentPicker';
     var today = moment().startOf('day');
     var defaults = {
-        date : today,
+        date: today,
         level: 0,
         style: {
             selected: 'selected',
-            current : 'current'
+            current: 'current'
         }
     };
 
@@ -15,7 +15,7 @@
 
         var plugin = $(this).data(pluginName);
 
-        if(plugin) {
+        if (plugin) {
 
             return plugin;
         }
@@ -31,9 +31,9 @@
 
             picker.html([
                 '<div class="header">',
-                    '<a class="prev"></a>',
-                    '<a class="current"></a>',
-                    '<a class="next"></a>',
+                '<a class="prev"></a>',
+                '<a class="current"></a>',
+                '<a class="next"></a>',
                 '</div>',
                 '<div class="body"></div>'
             ].join(''));
@@ -292,7 +292,7 @@
 
                 while (a < b) {
 
-                    var classes =  [];
+                    var classes = [];
 
                     if (a.format('D-M-YYYY') === today.format('D-M-YYYY')) {
 
@@ -325,11 +325,13 @@
                 emit('renderDays');
             };
 
-            var args = [
-                {years: 12},
-                {years: 1},
-                {months: 1}
-            ];
+            var args = [{
+                years: 12
+            }, {
+                years: 1
+            }, {
+                months: 1
+            }];
 
             var renderer = [renderYears, renderMonths, renderDays];
 
@@ -353,18 +355,18 @@
 
             var showNext = function() {
 
-                showedDate.add(args[_level]);
+                showedDate = showedDate.add(args[_level]);
                 render();
                 emit('showNext');
             };
 
             var showPrev = function() {
 
-                showedDate.subtract(args[_level]);
+                showedDate = showedDate.subtract(args[_level]);
                 render();
                 emit('showPrev');
             };
-            
+
             next.click(showNext);
             prev.click(showPrev);
 
@@ -416,15 +418,23 @@
             };
 
             api = {
-                val         : val,
-                next        : showNext,
-                prev        : showPrev,
-                min         : min,
-                max         : max,
-                showedDate  : showedDate,
-                renderYears : function () { render(0); },
-                renderMonths: function () { render(1); },
-                renderDays  : function () { render(2); }
+                val: val,
+                next: showNext,
+                prev: showPrev,
+                min: min,
+                max: max,
+                showedDate: function() {
+                    return showedDate;
+                },
+                renderYears: function() {
+                    render(0);
+                },
+                renderMonths: function() {
+                    render(1);
+                },
+                renderDays: function() {
+                    render(2);
+                }
             };
 
             if (settings.hasOwnProperty('min')) {
